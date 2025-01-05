@@ -24,17 +24,17 @@ import { MenuIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 const navItems = [
-  { href: '/chemoventry', label: 'Dashboard', icon: Home },
+  { href: '/', label: 'Dashboard', icon: Home },
   {
-    href: '/chemoventry/inventory',
+    href: '/inventory',
     label: 'Chemical Inventory',
     icon: FlaskConical,
   },
-  { href: '/chemoventry/qr-codes', label: 'QR Code Management', icon: QrCode },
-  { href: '/chemoventry/reports', label: 'Reports', icon: FileText },
-  { href: '/chemoventry/users', label: 'User Management', icon: Users },
-  { href: '/chemoventry/notifications', label: 'Notifications', icon: Bell },
-  { href: '/chemoventry/settings', label: 'Settings', icon: Settings },
+  { href: '/qr-codes', label: 'QR Code Management', icon: QrCode },
+  { href: '/reports', label: 'Reports', icon: FileText },
+  { href: '/users', label: 'User Management', icon: Users },
+  { href: '/notifications', label: 'Notifications', icon: Bell },
+  { href: '/settings', label: 'Settings', icon: Settings },
 ];
 
 const CustomSidebar = () => {
