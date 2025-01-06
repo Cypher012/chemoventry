@@ -35,7 +35,7 @@ const cardData = [
 const Dashboard = () => {
   return (
     <>
-      <PageTitle title="Dashboard" classname="dark:text-gray-100" />
+      <PageTitle title="Dashboard" />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {cardData.map((card, index) => (
           <DashboardHeader

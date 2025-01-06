@@ -28,6 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import PageTitle from '@/components/pageTitle';
 
 type User = {
   id: string;
@@ -61,31 +62,26 @@ export default function UserManagementPage() {
       } as User;
       setUsers([...users, newUserWithId]);
       setNewUser({});
-      console.log('user added');
     }
   };
 
   const handleDeleteUser = (id: string) => {
-    const userToDelete = users.find((u) => u.id === id);
     setUsers(users.filter((user) => user.id !== id));
-    if (userToDelete) {
-      console.log('user deleted');
-    }
   };
 
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-6">User Management</h1>
-      <div className="flex justify-between mb-4">
+    <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
+      <PageTitle title="User Management" />
+      <div className="flex flex-col sm:flex-row justify-between gap-4 mb-4">
         <Input
           placeholder="Search users..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="max-w-sm"
+          className="w-full sm:max-w-sm"
         />
         <Dialog>
           <DialogTrigger asChild>
-            <Button>Add User</Button>
+            <Button className="w-full sm:w-auto">Add User</Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
@@ -95,8 +91,8 @@ export default function UserManagementPage() {
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
+              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
+                <Label htmlFor="name" className="sm:text-right">
                   Name
                 </Label>
                 <Input
@@ -105,11 +101,11 @@ export default function UserManagementPage() {
                   onChange={(e) =>
                     setNewUser({ ...newUser, name: e.target.value })
                   }
-                  className="col-span-3"
+                  className="sm:col-span-3"
                 />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="email" className="text-right">
+              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
+                <Label htmlFor="email" className="sm:text-right">
                   Email
                 </Label>
                 <Input
@@ -119,11 +115,11 @@ export default function UserManagementPage() {
                   onChange={(e) =>
                     setNewUser({ ...newUser, email: e.target.value })
                   }
-                  className="col-span-3"
+                  className="sm:col-span-3"
                 />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="role" className="text-right">
+              <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
+                <Label htmlFor="role" className="sm:text-right">
                   Role
                 </Label>
                 <Select
@@ -132,7 +128,7 @@ export default function UserManagementPage() {
                   }
                   value={newUser.role}
                 >
-                  <SelectTrigger className="col-span-3">
+                  <SelectTrigger className="sm:col-span-3">
                     <SelectValue placeholder="Select a role" />
                   </SelectTrigger>
                   <SelectContent>
@@ -149,37 +145,41 @@ export default function UserManagementPage() {
           </DialogContent>
         </Dialog>
       </div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Role</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filteredUsers.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell>{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>{user.role}</TableCell>
-              <TableCell>
-                <Button variant="outline" size="sm" className="mr-2">
-                  Edit
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleDeleteUser(user.id)}
-                >
-                  Delete
-                </Button>
-              </TableCell>
+      <div className="overflow-x-auto">
+        <Table className="w-full">
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead>Actions</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {filteredUsers.map((user) => (
+              <TableRow key={user.id}>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.role}</TableCell>
+                <TableCell>
+                  <div className="flex flex-wrap gap-2">
+                    <Button variant="outline" size="sm">
+                      Edit
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleDeleteUser(user.id)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }

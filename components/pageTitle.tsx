@@ -9,7 +9,7 @@ const PageTitle = ({ title, classname }: PageTitleProps) => {
   return (
     <h2
       className={clsx(
-        'text-3xl font-bold text-gray-800 mb-10 mt-5 md:mt-0',
+        'text-3xl font-bold text-gray-800 dark:text-gray-100 mb-10 mt-5 md:mt-0',
         classname
       )}
     >

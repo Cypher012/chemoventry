@@ -4,7 +4,7 @@ import PageTitle from '@/components/pageTitle';
 export default function InventoryPage() {
   return (
     <>
-      <PageTitle title="Chemical Inventory" classname="dark:text-gray-100" />
+      <PageTitle title="Chemical Inventory" />
       <ChemicalInventory />
     </>
   );

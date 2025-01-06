@@ -72,35 +72,45 @@ export function ReportTable() {
   );
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 p-4">
       <Input
         placeholder="Search chemicals..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="max-w-sm"
+        className="max-w-full md:max-w-sm"
       />
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Chemical</TableHead>
-            <TableHead>Quantity</TableHead>
-            <TableHead>Unit</TableHead>
-            <TableHead>Location</TableHead>
-            <TableHead>Last Used</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filteredData.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.chemical}</TableCell>
-              <TableCell>{item.quantity}</TableCell>
-              <TableCell>{item.unit}</TableCell>
-              <TableCell>{item.location}</TableCell>
-              <TableCell>{item.lastUsed}</TableCell>
+      <div className="overflow-x-auto">
+        <Table className="min-w-full">
+          <TableHeader>
+            <TableRow>
+              <TableHead>Chemical</TableHead>
+              <TableHead>Quantity</TableHead>
+              <TableHead>Unit</TableHead>
+              <TableHead>Location</TableHead>
+              <TableHead>Last Used</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {filteredData.length > 0 ? (
+              filteredData.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>{item.chemical}</TableCell>
+                  <TableCell>{item.quantity}</TableCell>
+                  <TableCell>{item.unit}</TableCell>
+                  <TableCell>{item.location}</TableCell>
+                  <TableCell>{item.lastUsed}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={5} className="text-center">
+                  No results found.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }

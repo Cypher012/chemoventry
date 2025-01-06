@@ -27,27 +27,26 @@ export function ReportGenerator() {
   });
 
   const handleGenerateReport = () => {
-    // Here you would typically call an API to generate the report
     console.log('Generating report:', { reportType, dateRange });
   };
 
   const handleExport = (format: 'pdf' | 'excel') => {
-    // Here you would typically call an API to export the report
     console.log(`Exporting report as ${format}`);
   };
 
   return (
-    <Card>
+    <Card className="p-4 dark:bg-gray-950">
       <CardHeader>
-        <CardTitle>Generate Report</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-lg md:text-xl">Generate Report</CardTitle>
+        <CardDescription className="text-sm md:text-base">
           Select report type and date range to generate a report.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="flex space-x-4">
+      <CardContent className="space-y-6">
+        {/* Filters Section */}
+        <div className="flex flex-col gap-4 md:flex-row">
           <Select onValueChange={setReportType}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-full md:w-[180px]">
               <SelectValue placeholder="Select report type" />
             </SelectTrigger>
             <SelectContent>
@@ -57,14 +56,28 @@ export function ReportGenerator() {
               <SelectItem value="cost">Cost Analysis</SelectItem>
             </SelectContent>
           </Select>
-          <DatePickerWithRange onDateRangeChange={setDateRange} />
+          <div className="w-full">
+            <DatePickerWithRange onDateRangeChange={setDateRange} />
+          </div>
         </div>
-        <div className="flex space-x-4">
-          <Button onClick={handleGenerateReport}>Generate Report</Button>
-          <Button variant="outline" onClick={() => handleExport('pdf')}>
+
+        {/* Buttons Section */}
+        <div className="flex flex-col gap-4 md:flex-row md:items-center">
+          <Button onClick={handleGenerateReport} className="w-full md:w-auto">
+            Generate Report
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => handleExport('pdf')}
+            className="w-full md:w-auto"
+          >
             <FileDown className="mr-2 h-4 w-4" /> Export as PDF
           </Button>
-          <Button variant="outline" onClick={() => handleExport('excel')}>
+          <Button
+            variant="outline"
+            onClick={() => handleExport('excel')}
+            className="w-full md:w-auto"
+          >
             <FileDown className="mr-2 h-4 w-4" /> Export as Excel
           </Button>
         </div>

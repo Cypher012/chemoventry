@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import PageTitle from '@/components/pageTitle';
 
 type Notification = {
   id: string;
@@ -61,21 +62,21 @@ export default function NotificationsPage() {
   const getTypeColor = (type: Notification['type']) => {
     switch (type) {
       case 'info':
-        return 'bg-blue-500';
+        return 'dark:text-gray-800 dark:bg-blue-500 bg-blue-500';
       case 'success':
-        return 'bg-green-500';
+        return 'dark:text-gray-800 dark:bg-green-500 bg-green-500';
       case 'warning':
-        return 'bg-yellow-500';
+        return 'dark:text-gray-800 dark:bg-yellow-500 bg-yellow-500';
       case 'error':
-        return 'bg-red-500';
+        return 'dark:text-gray-800 dark:bg-red-500 bg-red-500';
       default:
-        return 'bg-gray-500';
+        return 'dark:text-gray-800 dark:bg-gray-500 bg-gray-500';
     }
   };
 
   return (
     <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-6">Notifications</h1>
+      <PageTitle title="Notifications" />
       <Card>
         <CardHeader>
           <CardTitle>Recent Notifications</CardTitle>
