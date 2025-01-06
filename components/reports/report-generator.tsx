@@ -19,9 +19,14 @@ import {
 import { DatePickerWithRange } from '@/components/ui/date-range-picker';
 import { FileDown } from 'lucide-react';
 
+interface DateRange {
+  from?: Date;
+  to?: Date;
+}
+
 export function ReportGenerator() {
   const [reportType, setReportType] = useState('');
-  const [dateRange, setDateRange] = useState({
+  const [dateRange, setDateRange] = useState<DateRange>({
     from: new Date(),
     to: new Date(),
   });
@@ -57,7 +62,9 @@ export function ReportGenerator() {
             </SelectContent>
           </Select>
           <div className="w-full">
-            <DatePickerWithRange onDateRangeChange={setDateRange} />
+            <DatePickerWithRange
+              onDateRangeChange={(range: DateRange) => setDateRange(range)}
+            />
           </div>
         </div>
 

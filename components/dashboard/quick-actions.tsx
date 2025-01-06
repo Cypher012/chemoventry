@@ -9,16 +9,16 @@ export function QuickActions() {
         <CardTitle>Quick Actions</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <Button className="w-full bg-[#727D73]">
+        <Button className="w-full bg-[#727D73] dark:hover:bg-gray-500">
           <Plus className="mr-2 h-4 w-4" /> Add New Chemical
         </Button>
-        <Button className="w-full bg-gray-400">
+        <Button className="w-full dark:bg-gray-100 dark:text-gray-800">
           <QrCode className="mr-2 h-4 w-4" /> Generate QR Code
         </Button>
-        <Button className="w-full bg-gray-400">
+        <Button className="w-full dark:bg-gray-100 dark:text-gray-800">
           <FileText className="mr-2 h-4 w-4" /> Generate Report
         </Button>
-        <Button className="w-full bg-gray-400">
+        <Button className="w-full dark:bg-gray-100 dark:text-gray-800">
           <AlertTriangle className="mr-2 h-4 w-4" /> View Alerts
         </Button>
       </CardContent>

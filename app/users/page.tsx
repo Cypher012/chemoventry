@@ -140,7 +140,9 @@ export default function UserManagementPage() {
               </div>
             </div>
             <DialogFooter>
-              <Button onClick={handleAddUser}>Add User</Button>
+              <Button className="dark:text-gray-200" onClick={handleAddUser}>
+                Add User
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

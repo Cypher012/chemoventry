@@ -103,7 +103,7 @@ export function QRCodeList() {
                   <div className="flex flex-col gap-2 sm:flex-row">
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Button variant="outline" size="sm">
+                        <Button className="dark:text-gray-100" size="sm">
                           View QR
                         </Button>
                       </DialogTrigger>
@@ -126,7 +126,7 @@ export function QRCodeList() {
                       </DialogContent>
                     </Dialog>
                     <Button
-                      variant="outline"
+                      variant="destructive"
                       size="sm"
                       onClick={() => handleDeleteQRCode(item.id)}
                     >

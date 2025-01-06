@@ -179,7 +179,7 @@ export function ChemicalInventory() {
           </div>
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="w-full sm:w-auto dark:bg-gray-300 bg-gray-200 text-gray-800 hover:bg-gray-100">
+              <Button className="w-full sm:w-auto bg-[#727D73] dark:hover:bg-gray-500 dark:text-gray-200 text-gray-800 hover:bg-gray-100">
                 <Plus className="mr-2 h-4 w-4" /> Add Chemical
               </Button>
             </DialogTrigger>
