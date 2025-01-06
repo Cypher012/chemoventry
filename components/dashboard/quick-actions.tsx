@@ -12,13 +12,13 @@ export function QuickActions() {
         <Button className="w-full bg-[#727D73]">
           <Plus className="mr-2 h-4 w-4" /> Add New Chemical
         </Button>
-        <Button className="w-full" variant="outline">
+        <Button className="w-full bg-gray-400">
           <QrCode className="mr-2 h-4 w-4" /> Generate QR Code
         </Button>
-        <Button className="w-full" variant="outline">
+        <Button className="w-full bg-gray-400">
           <FileText className="mr-2 h-4 w-4" /> Generate Report
         </Button>
-        <Button className="w-full" variant="outline">
+        <Button className="w-full bg-gray-400">
           <AlertTriangle className="mr-2 h-4 w-4" /> View Alerts
         </Button>
       </CardContent>

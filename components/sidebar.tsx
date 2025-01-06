@@ -138,7 +138,7 @@ const NavLinks = () => {
         <Link
           key={item.href}
           href={item.href}
-          className="flex items-center px-5  h-14 text-gray-700 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-800"
+          className="flex items-center px-5  h-14 text-gray-700 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600/75"
         >
           <item.icon size={24} />
           <span className="ml-4 font-medium">{item.label}</span>

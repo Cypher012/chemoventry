@@ -142,7 +142,7 @@ export function ChemicalInventory() {
               placeholder="Search chemicals..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full sm:max-w-sm"
+              className="w-full dark:bg-gray-800 sm:max-w-sm"
             />
             <Select
               value={reactivityFilter}
@@ -150,10 +150,10 @@ export function ChemicalInventory() {
                 setReactivityFilter(value as Chemical['reactivity'] | 'All')
               }
             >
-              <SelectTrigger className="w-full sm:w-[180px]">
+              <SelectTrigger className="w-full sm:w-[180px] dark:bg-gray-800">
                 <SelectValue placeholder="Reactivity" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="dark:bg-gray-800">
                 <SelectItem value="All">All Reactivity</SelectItem>
                 <SelectItem value="Low">Low</SelectItem>
                 <SelectItem value="Moderate">Moderate</SelectItem>
@@ -166,10 +166,10 @@ export function ChemicalInventory() {
                 setOrganicStateFilter(value as Chemical['organicState'] | 'All')
               }
             >
-              <SelectTrigger className="w-full sm:w-[180px]">
+              <SelectTrigger className="w-full dark:bg-gray-800 sm:w-[180px]">
                 <SelectValue placeholder="Organic State" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="dark:bg-gray-800">
                 <SelectItem value="All">All States</SelectItem>
                 <SelectItem value="Solid">Solid</SelectItem>
                 <SelectItem value="Liquid">Liquid</SelectItem>
@@ -179,7 +179,7 @@ export function ChemicalInventory() {
           </div>
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="w-full sm:w-auto">
+              <Button className="w-full sm:w-auto bg-[#727D73]">
                 <Plus className="mr-2 h-4 w-4" /> Add Chemical
               </Button>
             </DialogTrigger>
