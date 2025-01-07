@@ -77,7 +77,7 @@ export default function NotificationsPage() {
   return (
     <div className="container mx-auto py-10">
       <PageTitle title="Notifications" />
-      <Card className=" dark:bg-gray-950">
+      <Card className=" dark:bg-gray-900/60">
         <CardHeader>
           <CardTitle>Recent Notifications</CardTitle>
           <CardDescription>

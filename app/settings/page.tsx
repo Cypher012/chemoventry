@@ -32,7 +32,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container  mx-auto py-10">
       <PageTitle title="Settings" />
       <Tabs defaultValue="general">
         <TabsList>
@@ -40,7 +40,7 @@ export default function SettingsPage() {
           <TabsTrigger value="security">Security</TabsTrigger>
         </TabsList>
         <TabsContent value="general">
-          <Card>
+          <Card className="dark:bg-gray-900/60">
             <CardHeader>
               <CardTitle>General Settings</CardTitle>
               <CardDescription>
@@ -89,7 +89,7 @@ export default function SettingsPage() {
           </Card>
         </TabsContent>
         <TabsContent value="security">
-          <Card>
+          <Card className="dark:bg-gray-900/60">
             <CardHeader>
               <CardTitle>Security Settings</CardTitle>
               <CardDescription>

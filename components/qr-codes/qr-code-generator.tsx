@@ -26,7 +26,7 @@ export function QRCodeGenerator() {
   };
 
   return (
-    <Card>
+    <Card className="dark:bg-gray-900/60">
       <CardHeader>
         <CardTitle>Generate QR Code</CardTitle>
         <CardDescription>
@@ -52,12 +52,7 @@ export function QRCodeGenerator() {
             placeholder="Enter chemical ID"
           />
         </div>
-        <Button
-          className="bg-[#727D73] dark:hover:bg-gray-500 dark:text-gray-200"
-          onClick={handleGenerateQR}
-        >
-          Generate QR Code
-        </Button>
+        <Button onClick={handleGenerateQR}>Generate QR Code</Button>
         {generatedQR && (
           <div className="mt-4 flex justify-center">
             <QRCode value={generatedQR} size={200} />

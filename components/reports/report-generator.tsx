@@ -40,7 +40,7 @@ export function ReportGenerator() {
   };
 
   return (
-    <Card className="p-4 dark:bg-gray-950">
+    <Card className="p-4  dark:bg-gray-900/60">
       <CardHeader>
         <CardTitle className="text-lg md:text-xl">Generate Report</CardTitle>
         <CardDescription className="text-sm md:text-base">
