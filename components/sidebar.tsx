@@ -43,7 +43,7 @@ const CustomSidebar = () => {
     <>
       <div className="hidden md:block">
         <div className="fixed top-0 left-0 flex flex-col w-64 h-screen bg-gray-100 dark:bg-gray-900 gap-y-7 py-5">
-          <div className="flex items-center justify-center h-14">
+          <Link href={'/'} className="flex items-center justify-center h-14">
             <svg
               className="w-8 h-8 mr-2"
               viewBox="0 0 24 24"
@@ -63,7 +63,7 @@ const CustomSidebar = () => {
             <span className="text-gray-800 dark:text-gray-100  text-2xl font-bold">
               Chemoventry
             </span>
-          </div>
+          </Link>
           <NavLinks />
         </div>
       </div>
@@ -83,26 +83,30 @@ const CustomSidebar = () => {
           </SheetTrigger>
           <SheetContent className="px-0 dark:bg-gray-900" side={'left'}>
             <SheetHeader className=" dark:text-gray-100">
-              <SheetTitle className="flex items-center h-14 px-4">
-                <svg
-                  className="w-8 h-8 mr-2"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7 3V7M17 3V7M3 10H21M5 5H19C20.1046 5 21 5.89543 21 7V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V7C3 5.89543 3.89543 5 5 5Z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path d="M12 14L9 17H15L12 14Z" fill="currentColor" />
-                  <path d="M12 14L15 11H9L12 14Z" fill="currentColor" />
-                </svg>
-                <span className=" dark:text-gray-200  text-2xl font-bold">
-                  Chemoventry
-                </span>
+              <SheetTitle className="h-14 px-4">
+                <SheetClose asChild>
+                  <Link href={'/'} className="flex items-center">
+                    <svg
+                      className="w-8 h-8 mr-2"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 3V7M17 3V7M3 10H21M5 5H19C20.1046 5 21 5.89543 21 7V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V7C3 5.89543 3.89543 5 5 5Z"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path d="M12 14L9 17H15L12 14Z" fill="currentColor" />
+                      <path d="M12 14L15 11H9L12 14Z" fill="currentColor" />
+                    </svg>
+                    <span className=" dark:text-gray-200  text-2xl font-bold">
+                      Chemoventry
+                    </span>
+                  </Link>
+                </SheetClose>
               </SheetTitle>
               <SheetDescription asChild className="">
                 <div className="flex flex-col">
