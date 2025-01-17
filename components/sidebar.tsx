@@ -54,7 +54,7 @@ const CustomSidebar = () => {
   const LogoutFunc = () => {
     cookies.remove('access_token');
     cookies.remove('refresh_token');
-    router.push('/login');
+    router.replace('/login');
   };
   return (
     <>
