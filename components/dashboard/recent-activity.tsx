@@ -47,7 +47,7 @@ export function RecentActivity() {
         <Activity className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-900 scrollbar-track-gray-300">
           <table className="w-full border-collapse border border-gray-300 text-left text-sm">
             <thead className="bg-gray-100 dark:bg-gray-800">
               <tr>

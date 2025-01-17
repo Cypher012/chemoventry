@@ -7,6 +7,7 @@ import {
   Users,
   Bell,
   Settings,
+  LogOut,
 } from 'lucide-react'; // Adjust the import paths as necessary
 import Link from 'next/link';
 import {
@@ -18,27 +19,43 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
 import { MenuIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { cookies } from '@/lib/utils';
 
 const navItems = [
-  { href: '/', label: 'Dashboard', icon: Home },
+  { href: '/chemoventry', label: 'Dashboard', icon: Home },
   {
-    href: '/inventory',
+    href: '/chemoventry/inventory',
     label: 'Chemical Inventory',
     icon: FlaskConical,
   },
-  { href: '/qr-codes', label: 'QR Code Management', icon: QrCode },
-  { href: '/reports', label: 'Reports', icon: FileText },
-  { href: '/users', label: 'User Management', icon: Users },
-  { href: '/notifications', label: 'Notifications', icon: Bell },
-  { href: '/settings', label: 'Settings', icon: Settings },
+  { href: '/chemoventry/qr-codes', label: 'QR Code Management', icon: QrCode },
+  { href: '/chemoventry/reports', label: 'Reports', icon: FileText },
+  { href: '/chemoventry/users', label: 'User Management', icon: Users },
+  { href: '/chemoventry/notifications', label: 'Notifications', icon: Bell },
+  { href: '/chemoventry/settings', label: 'Settings', icon: Settings },
 ];
 
 const CustomSidebar = () => {
   const router = useRouter();
+  const LogoutFunc = () => {
+    cookies.remove('access_token');
+    cookies.remove('refresh_token');
+    router.push('/login');
+  };
   return (
     <>
       <div className="hidden md:block">
@@ -65,6 +82,45 @@ const CustomSidebar = () => {
             </span>
           </Link>
           <NavLinks />
+          <div className="absolute bottom-3">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="bg-transparent hover:bg-inherit text-base text-gray-700 dark:text-gray-100">
+                  <LogOut />
+                  <span>Log Out</span>
+                </Button>
+              </DialogTrigger>
+
+              <DialogContent className="p-6">
+                <DialogHeader className="mb-4">
+                  <DialogTitle className="text-xl font-semibold">
+                    Log Out Confirmation
+                  </DialogTitle>
+                  <DialogDescription>
+                    Are you sure you want to log out of your account?
+                  </DialogDescription>
+                </DialogHeader>
+
+                <DialogFooter className="flex justify-between">
+                  <DialogClose asChild>
+                    <Button
+                      variant="outline"
+                      className="text-gray-500 dark:text-gray-300"
+                    >
+                      Cancel
+                    </Button>
+                  </DialogClose>
+                  <Button
+                    onClick={LogoutFunc}
+                    type="submit"
+                    className="bg-red-600 text-white hover:bg-red-700"
+                  >
+                    Log Out
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
       </div>
       <div className="md:hidden">
@@ -85,7 +141,7 @@ const CustomSidebar = () => {
             <SheetHeader className=" dark:text-gray-100">
               <SheetTitle className="h-14 px-4">
                 <SheetClose asChild>
-                  <Link href={'/'} className="flex items-center">
+                  <Link href={'/chemoventry'} className="flex items-center">
                     <svg
                       className="w-8 h-8 mr-2"
                       viewBox="0 0 24 24"
@@ -145,7 +201,7 @@ const NavLinks = () => {
           className="flex items-center px-5  h-14 text-gray-700 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600/75"
         >
           <item.icon size={24} />
-          <span className="ml-4 font-medium">{item.label}</span>
+          <span className="ml-4">{item.label}</span>
         </Link>
       ))}
     </div>

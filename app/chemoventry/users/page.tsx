@@ -140,9 +140,7 @@ export default function UserManagementPage() {
               </div>
             </div>
             <DialogFooter>
-              <Button className="dark:text-gray-200" onClick={handleAddUser}>
-                Add User
-              </Button>
+              <Button onClick={handleAddUser}>Add User</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -165,11 +163,14 @@ export default function UserManagementPage() {
                 <TableCell>{user.role}</TableCell>
                 <TableCell>
                   <div className="flex flex-wrap gap-2">
-                    <Button variant="outline" size="sm">
+                    <Button
+                      className="bg-green-700 hover:bg-green-700/60"
+                      size="sm"
+                    >
                       Edit
                     </Button>
                     <Button
-                      variant="outline"
+                      variant={'destructive'}
                       size="sm"
                       onClick={() => handleDeleteUser(user.id)}
                     >
