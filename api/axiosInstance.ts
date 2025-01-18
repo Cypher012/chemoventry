@@ -30,7 +30,6 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     try {
-      // console.log(error);
       if (axios.isAxiosError(error)) {
         const skipRefreshEndpoints = ['/token/', '/refresh/', 'token/verify/'];
         if (
@@ -44,7 +43,6 @@ axiosInstance.interceptors.response.use(
           const access_token = cookies.get('access_token');
           if (!access_token) throw new Error('No access token found');
           const refresh_token = cookies.get('refresh_token');
-          console.log(refresh_token);
           if (!refresh_token) throw new Error('No refresh token found');
 
           const verifyTokenResponse = await axiosInstance.post('/verify/', {

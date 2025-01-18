@@ -11,12 +11,10 @@ export const useLogin = () => {
   return useMutation({
     mutationFn: (data: LoginSchemaType) => loginUser(data),
     onSuccess: () => {
-      console.log('Data successful');
       router.replace('/chemoventry');
     },
     onError: (error) => {
       const errorMessage = error.message || 'Something went wrong';
-      console.log(errorMessage);
       toast({
         variant: 'destructive',
         title: errorMessage,

@@ -19,11 +19,8 @@ const Login = () => {
   const { register, handleSubmit } = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema),
   });
-  // const { toast } = useToast();
-  // console.log(toast);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const onSubmit: SubmitHandler<LoginSchemaType> = (data) => {
-    console.log(data);
     login.mutate(data);
   };
 
@@ -106,7 +103,13 @@ const Login = () => {
             </div>
 
             <div className="flex items-center justify-end">
-              <Button type="submit">Sign in</Button>
+              <Button
+                disabled={login.isPending}
+                className="disabled:bg-slate-700"
+                type="submit"
+              >
+                Sign in
+              </Button>
             </div>
           </form>
         </div>

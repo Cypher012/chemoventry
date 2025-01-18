@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { QueryClientProviderWrapper } from '@/api/queryClientWrapper';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
+import LoadingWrapper from '@/components/laodingWrapper';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -41,6 +42,7 @@ export default function RootLayout({
         >
           <QueryClientProviderWrapper>
             {children}
+            <LoadingWrapper />
             <Toaster />
           </QueryClientProviderWrapper>
         </ThemeProvider>

@@ -8,7 +8,6 @@ export const loginUser = async (data: LoginSchemaType) => {
     const response = await axiosInstance.post('/token/', data);
     return response;
   } catch (error) {
-    console.log(error);
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 401) {
         const backendMessage = error.response.data?.detail;

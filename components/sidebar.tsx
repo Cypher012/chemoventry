@@ -34,6 +34,9 @@ import { Button } from '@/components/ui/button';
 import { MenuIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { cookies } from '@/lib/utils';
+import { useEffect, useTransition } from 'react';
+import { useNavigationStore } from '@/store/loading.store';
+import OrbitLoader from '@/app/loading';
 
 const navItems = [
   { href: '/chemoventry', label: 'Dashboard', icon: Home },
@@ -50,14 +53,33 @@ const navItems = [
 ];
 
 const CustomSidebar = () => {
-  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const setPending = useNavigationStore((state) => state.setPending);
+  useEffect(() => {
+    if (!isPending) {
+      setPending(false);
+    }
+  }, [isPending, setPending]);
+
   const LogoutFunc = () => {
     cookies.remove('access_token');
     cookies.remove('refresh_token');
     router.replace('/login');
+    location.reload();
   };
+  const router = useRouter();
+
+  const handleNavigation = (link: string) => {
+    // Set pending to true before the transition starts
+    setPending(isPending);
+    startTransition(() => {
+      router.push(link); // Navigate to the new route
+    });
+  };
+
   return (
     <>
+      {isPending && <OrbitLoader />}
       <div className="hidden md:block">
         <div className="fixed top-0 left-0 flex flex-col w-64 h-screen bg-gray-100 dark:bg-gray-900 gap-y-7 py-5">
           <Link href={'/'} className="flex items-center justify-center h-14">
@@ -81,7 +103,7 @@ const CustomSidebar = () => {
               Chemoventry
             </span>
           </Link>
-          <NavLinks />
+          <NavLinks navigate={handleNavigation} />
           <div className="absolute bottom-3">
             <Dialog>
               <DialogTrigger asChild>
@@ -191,20 +213,23 @@ const CustomSidebar = () => {
 
 export default CustomSidebar;
 
-const NavLinks = () => {
+const NavLinks = ({ navigate }: { navigate: (link: string) => void }) => {
   return (
-    <div className="flex flex-col">
-      {navItems.map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
-          className="flex items-center px-5  h-14 text-gray-700 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600/75"
-        >
-          <item.icon size={24} />
-          <span className="ml-4">{item.label}</span>
-        </Link>
-      ))}
-    </div>
+    <>
+      <div className="flex flex-col">
+        {navItems.map((item) => (
+          <Button
+            variant={'link'}
+            key={item.href}
+            onClick={() => navigate(`${item.href}`)}
+            className="flex justify-start px-5 hover:no-underline  h-14 text-gray-700 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600/75"
+          >
+            <item.icon size={24} />
+            <span className="ml-4">{item.label}</span>
+          </Button>
+        ))}
+      </div>
+    </>
   );
 };
 
