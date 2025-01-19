@@ -1,30 +1,8 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+// import { useMutation } from '@tanstack/react-query';
 import { getChemicals } from './chemicals';
-
-export interface Chemical {
-  id: string;
-  name: string;
-  quantity: number;
-  description: string;
-  vendor: string;
-  hazard_information: string;
-  molecular_formula: string;
-  reactivity_group: string;
-  chemical_type: string;
-  chemical_state: string;
-  expires: string; // You could use `Date` if you prefer, but `string` will work for ISO 8601 date strings.
-  created_at: string; // You could use `Date` if you prefer, but `string` will work for ISO 8601 date strings.
-  updated_at: string; // You could use `Date` if you prefer, but `string` will work for ISO 8601 date strings.
-  Shelf: number;
-  created_by: number;
-}
-
-export type ChemicalsResponse = {
-  chemicals: Chemical[];
-  count: number;
-};
 
 export const useGetChemicals = () => {
   return useQuery({
@@ -38,3 +16,17 @@ export const useGetChemicals = () => {
     },
   });
 };
+
+// export const usePostChemicals = () => {
+
+//   return useMutation({
+//     mutationFn: (data:Ch) => loginUser(data),
+//     onSuccess: () => {
+//       router.replace('/chemoventry');
+//     },
+//     onError: (error) => {
+//       const errorMessage = error.message || 'Something went wrong';
+//       return errorMessage
+//     },
+//   });
+// };

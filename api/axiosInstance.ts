@@ -31,43 +31,51 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     try {
       if (axios.isAxiosError(error)) {
-        const skipRefreshEndpoints = ['/token/', '/refresh/', 'token/verify/'];
-        if (
-          skipRefreshEndpoints.some((endpoint) =>
-            error.config?.url?.includes(endpoint)
-          )
-        ) {
-          return Promise.reject(error);
-        }
         if (error.response?.status === 401) {
-          const access_token = cookies.get('access_token');
-          if (!access_token) throw new Error('No access token found');
-          const refresh_token = cookies.get('refresh_token');
-          if (!refresh_token) throw new Error('No refresh token found');
+          let access_token = cookies.get('access_token');
+          let refresh_token = cookies.get('refresh_token');
+          // console.log(`access token: ${access_token ? true : false}`);
+          // console.log(`refresh token: ${refresh_token ? true : false}`);
+          if (!access_token && !refresh_token) {
+            return 'An unauthorized access';
+          }
+          if (refresh_token) {
+            const response = await axiosInstance.post('/token/refresh/', {
+              refresh: refresh_token,
+            });
+            console.log(response.data);
 
-          const verifyTokenResponse = await axiosInstance.post('/verify/', {
-            token: access_token,
-          });
+            cookies.remove('access_token');
+            cookies.remove('refresh_token');
 
-          if (verifyTokenResponse.status === 401) {
-            throw new Error('Token is invalid or expired');
+            cookies.set({
+              tokenType: 'access_token',
+              token: response.data.access,
+            });
+            cookies.set({
+              tokenType: 'refresh_token',
+              token: response.data.refresh,
+            });
+            // Retry the original request with the new access token
+            if (error.config && error.config.headers) {
+              error.config.headers.Authorization = `JWT ${response.data.access}`;
+            }
           }
 
-          const response = await axiosInstance.post('/refresh/', {
-            refresh: refresh_token,
-          });
+          access_token = cookies.get('access_token');
+          refresh_token = cookies.get('refresh_token');
+          // console.log(`access token: ${access_token ? true : false}`);
+          // console.log(`refresh token: ${refresh_token ? true : false}`);
 
-          cookies.set({
-            tokenType: 'access_token',
-            token: response.data.access,
-          });
-          cookies.set({
-            tokenType: 'refresh_token',
-            token: response.data.refresh,
-          });
-          // Retry the original request with the new access token
-          if (error.config && error.config.headers) {
-            error.config.headers.Authorization = `JWT ${response.data.access}`;
+          const verifyTokenResponse = await axiosInstance.post(
+            '/token/verify/',
+            {
+              token: access_token,
+            }
+          );
+
+          if (verifyTokenResponse && verifyTokenResponse.status === 401) {
+            throw new Error('Token is invalid or expired');
           }
         }
       }

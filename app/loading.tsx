@@ -15,7 +15,7 @@ const OrbitLoader = () => {
   }, []);
 
   return (
-    <div className="absolute overflow-hidden z-[1000] inset-0 flex justify-center items-center bg-gray-700/15 dark:bg-gray-700/55">
+    <div className="absolute overflow-hidden z-[1000] inset-0 flex justify-center items-center bg-white/70 dark:bg-gray-700/55">
       <div className={styles.container}>
         <div className={styles.slice}></div>
         <div className={styles.slice}></div>

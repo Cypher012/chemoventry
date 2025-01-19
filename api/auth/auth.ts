@@ -1,7 +1,6 @@
 import { LoginSchemaType } from '@/schemas/loginSchema';
 import axios from 'axios';
 import { axiosInstance } from '../axiosInstance';
-// import { cookies } from '@/lib/utils';
 
 export const loginUser = async (data: LoginSchemaType) => {
   try {

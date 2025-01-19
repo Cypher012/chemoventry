@@ -4,35 +4,35 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertTriangle, Beaker, PackageOpen, TrendingUp } from 'lucide-react';
 import { useGetChemicals } from '@/api/chemicals/useChemicals';
 import { useMemo } from 'react';
-import { Chemical } from '@/api/chemicals/chemicals';
+import { countExpiredChemicals, lowStockCount } from './utils';
 const DashboardHeader = () => {
   const { data } = useGetChemicals();
-  const countExpiredChemicals = (chemicals: Chemical[]) => {
-    const currentDate = new Date();
 
-    return chemicals.filter((chemical: Chemical) => {
-      const expirationDate = new Date(chemical.expires);
-      return expirationDate < currentDate;
-    }).length;
-  };
-  const cardData = useMemo(
-    () => [
+  const cardData = useMemo(() => {
+    const totalChemicals = data?.count ?? '--'; // Default to 0 if count is undefined or null
+    const expiredChemicals = data?.chemicals
+      ? countExpiredChemicals(data?.chemicals)
+      : '--';
+    const lowStockChemicals = data?.chemicals
+      ? lowStockCount(data?.chemicals).length
+      : '--';
+    return [
       {
         title: 'Total Chemicals',
         icon: <Beaker className="h-4 w-4 text-muted-foreground" />,
-        value: data?.count,
+        value: totalChemicals,
         description: '+20 from last month',
       },
       {
         title: 'Expired Chemicals',
         icon: <AlertTriangle className="h-4 w-4 text-muted-foreground" />,
-        value: data?.chemicals && countExpiredChemicals(data?.chemicals),
+        value: expiredChemicals,
         description: '+4 from last month',
       },
       {
         title: 'Low Stock Alerts',
         icon: <PackageOpen className="h-4 w-4 text-muted-foreground" />,
-        value: '7',
+        value: lowStockChemicals,
         description: '-2 from last month',
       },
       {
@@ -41,9 +41,8 @@ const DashboardHeader = () => {
         value: '+12.5%',
         description: 'Compared to last month',
       },
-    ],
-    [data]
-  );
+    ];
+  }, [data]);
 
   return (
     <>

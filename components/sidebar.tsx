@@ -10,38 +10,16 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-const Dialog = dynamic(
-  () => import('@/components/ui/dialog').then((mod) => mod.Dialog),
-  { ssr: false }
-);
-const DialogClose = dynamic(
-  () => import('@/components/ui/dialog').then((mod) => mod.DialogClose),
-  { ssr: false }
-);
-const DialogContent = dynamic(
-  () => import('@/components/ui/dialog').then((mod) => mod.DialogContent),
-  { ssr: false }
-);
-const DialogDescription = dynamic(
-  () => import('@/components/ui/dialog').then((mod) => mod.DialogDescription),
-  { ssr: false }
-);
-const DialogFooter = dynamic(
-  () => import('@/components/ui/dialog').then((mod) => mod.DialogFooter),
-  { ssr: false }
-);
-const DialogHeader = dynamic(
-  () => import('@/components/ui/dialog').then((mod) => mod.DialogHeader),
-  { ssr: false }
-);
-const DialogTitle = dynamic(
-  () => import('@/components/ui/dialog').then((mod) => mod.DialogTitle),
-  { ssr: false }
-);
-const DialogTrigger = dynamic(
-  () => import('@/components/ui/dialog').then((mod) => mod.DialogTrigger),
-  { ssr: false }
-);
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTrigger,
+  DialogTitle,
+} from '@/components/ui/dialog';
 const OrbitLoader = dynamic(() => import('@/app/loading'), { ssr: false });
 import { Button } from '@/components/ui/button';
 import { LogOut, MenuIcon } from 'lucide-react';
@@ -65,7 +43,6 @@ const CustomSidebar = () => {
     cookies.remove('access_token');
     cookies.remove('refresh_token');
     router.replace('/login');
-    location.reload();
   };
   const router = useRouter();
 
@@ -191,7 +168,7 @@ const CustomSidebar = () => {
                     <SheetClose key={item.href} asChild>
                       <div className="w-full">
                         <Button
-                          onClick={() => router.push(item.href)}
+                          onClick={() => handleNavigation(item.href)}
                           className="flex justify-start w-full no-underline bg-transparent items-center px-5  h-14 text-gray-700 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-800"
                         >
                           <item.icon size={24} />

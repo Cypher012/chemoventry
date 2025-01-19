@@ -10,17 +10,17 @@ type CookiesType =
   | {
       token: string;
       tokenType: 'access_token';
-      expires: 1; // Expires in 1 day
+      expires: number; // Expires in 1 day
     }
   | {
       token: string;
       tokenType: 'refresh_token';
-      expires: 7; // Expires in 7 days
+      expires: number; // Expires in 7 days
     };
 
 export const cookies = {
   set: ({ tokenType, token }: Omit<CookiesType, 'expires'>) => {
-    const expires = tokenType === 'access_token' ? 1 : 7;
+    const expires = tokenType === 'access_token' ? 2 / 24 : 14;
     return Cookies.set(tokenType, token, {
       expires,
       secure: true,
