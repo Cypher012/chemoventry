@@ -1,15 +1,6 @@
 'use client';
-import {
-  Home,
-  FlaskConical,
-  QrCode,
-  FileText,
-  Users,
-  Bell,
-  Settings,
-  LogOut,
-} from 'lucide-react'; // Adjust the import paths as necessary
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import {
   Sheet,
   SheetClose,
@@ -19,40 +10,49 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+const Dialog = dynamic(
+  () => import('@/components/ui/dialog').then((mod) => mod.Dialog),
+  { ssr: false }
+);
+const DialogClose = dynamic(
+  () => import('@/components/ui/dialog').then((mod) => mod.DialogClose),
+  { ssr: false }
+);
+const DialogContent = dynamic(
+  () => import('@/components/ui/dialog').then((mod) => mod.DialogContent),
+  { ssr: false }
+);
+const DialogDescription = dynamic(
+  () => import('@/components/ui/dialog').then((mod) => mod.DialogDescription),
+  { ssr: false }
+);
+const DialogFooter = dynamic(
+  () => import('@/components/ui/dialog').then((mod) => mod.DialogFooter),
+  { ssr: false }
+);
+const DialogHeader = dynamic(
+  () => import('@/components/ui/dialog').then((mod) => mod.DialogHeader),
+  { ssr: false }
+);
+const DialogTitle = dynamic(
+  () => import('@/components/ui/dialog').then((mod) => mod.DialogTitle),
+  { ssr: false }
+);
+const DialogTrigger = dynamic(
+  () => import('@/components/ui/dialog').then((mod) => mod.DialogTrigger),
+  { ssr: false }
+);
+const OrbitLoader = dynamic(() => import('@/app/loading'), { ssr: false });
 import { Button } from '@/components/ui/button';
-
-import { MenuIcon } from 'lucide-react';
+import { LogOut, MenuIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { cookies } from '@/lib/utils';
-import { useEffect, useTransition } from 'react';
+import { useEffect, useTransition, useMemo } from 'react';
 import { useNavigationStore } from '@/store/loading.store';
-import OrbitLoader from '@/app/loading';
-
-const navItems = [
-  { href: '/chemoventry', label: 'Dashboard', icon: Home },
-  {
-    href: '/chemoventry/inventory',
-    label: 'Chemical Inventory',
-    icon: FlaskConical,
-  },
-  { href: '/chemoventry/qr-codes', label: 'QR Code Management', icon: QrCode },
-  { href: '/chemoventry/reports', label: 'Reports', icon: FileText },
-  { href: '/chemoventry/users', label: 'User Management', icon: Users },
-  { href: '/chemoventry/notifications', label: 'Notifications', icon: Bell },
-  { href: '/chemoventry/settings', label: 'Settings', icon: Settings },
-];
+import { navItems as navLinks } from '@/constants/navlinks';
 
 const CustomSidebar = () => {
+  const navItems = useMemo(() => navLinks, []);
   const [isPending, startTransition] = useTransition();
   const setPending = useNavigationStore((state) => state.setPending);
   useEffect(() => {
@@ -70,10 +70,9 @@ const CustomSidebar = () => {
   const router = useRouter();
 
   const handleNavigation = (link: string) => {
-    // Set pending to true before the transition starts
     setPending(isPending);
     startTransition(() => {
-      router.push(link); // Navigate to the new route
+      router.push(link);
     });
   };
 
@@ -214,6 +213,8 @@ const CustomSidebar = () => {
 export default CustomSidebar;
 
 const NavLinks = ({ navigate }: { navigate: (link: string) => void }) => {
+  const navItems = useMemo(() => navLinks, []);
+
   return (
     <>
       <div className="flex flex-col">

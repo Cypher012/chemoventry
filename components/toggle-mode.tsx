@@ -1,20 +1,28 @@
 'use client';
 
-import * as React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-
+import { useState, useEffect, useMemo, ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import clsx from 'clsx';
 
-export function ModeToggle({ className }: { className?: React.ReactNode }) {
+export function ModeToggle({ className }: { className?: ReactNode }) {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Ensure the component is only rendered after it has mounted
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Memoize the icon JSX to prevent unnecessary re-renders
+  const icon = useMemo(() => {
+    return theme === 'dark' ? (
+      <Moon className="h-[1.2rem] w-[1.2rem] transition-transform" />
+    ) : (
+      <Sun className="h-[1.2rem] w-[1.2rem] transition-transform" />
+    );
+  }, [theme]);
 
   if (!mounted) {
     return null; // Prevent rendering until the client-side has mounted
@@ -31,11 +39,7 @@ export function ModeToggle({ className }: { className?: React.ReactNode }) {
       size="icon"
       onClick={handleThemeChange}
     >
-      {theme === 'dark' ? (
-        <Moon className="h-[1.2rem] w-[1.2rem] transition-transform" />
-      ) : (
-        <Sun className="h-[1.2rem] w-[1.2rem] transition-transform" />
-      )}
+      {icon}
     </Button>
   );
 }
