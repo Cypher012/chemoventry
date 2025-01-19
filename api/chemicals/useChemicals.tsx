@@ -1,8 +1,8 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-// import { useMutation } from '@tanstack/react-query';
-import { getChemicals } from './chemicals';
+import { useMutation } from '@tanstack/react-query';
+import { Chemical, getChemicals, postChemicals } from './chemicals';
 
 export const useGetChemicals = () => {
   return useQuery({
@@ -17,16 +17,15 @@ export const useGetChemicals = () => {
   });
 };
 
-// export const usePostChemicals = () => {
-
-//   return useMutation({
-//     mutationFn: (data:Ch) => loginUser(data),
-//     onSuccess: () => {
-//       router.replace('/chemoventry');
-//     },
-//     onError: (error) => {
-//       const errorMessage = error.message || 'Something went wrong';
-//       return errorMessage
-//     },
-//   });
-// };
+export const usePostChemicals = () => {
+  return useMutation({
+    mutationFn: (data: Chemical) => postChemicals(data),
+    onSuccess: () => {
+      console.log('successful');
+    },
+    onError: (error) => {
+      const errorMessage = error.message || 'Something went wrong';
+      return errorMessage;
+    },
+  });
+};
